@@ -4,16 +4,21 @@ function create(newReservation) {
   return knex("reservations").insert(newReservation).returning("*");
 }
 
-async function list(date) {
-  return knex("reservations").select("*").where("reservation_date", date).orderBy("reservation_time");
+function list(date) {
+  return knex("reservations").select("*").where("reservation_date", date).whereNot("status", "finished").orderBy("reservation_time");
 }
 
-async function read(reservationId) {
-  return knex("reservations").select("*").where("reservation_id", reservationId)
+function read(reservationId) {
+  return knex("reservations").select("*").where("reservation_id", reservationId).first()
+}
+
+function update(reservation_id, status) {
+  return knex("reservations").where("reservation_id", reservation_id).update({status}).select("*").returning("*")
 }
 
 module.exports = {
   create,
   list,
   read,
+  update,
 };

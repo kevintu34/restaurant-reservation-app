@@ -37,6 +37,22 @@ function validateHasTextFunction(field) {
   return validateHasText
 }
 
+//if status is sent, validate that it is booked
+function validateStatus(req, res, next) {
+  if(req.body.data.status) {
+    if(req.body.data.status !== "booked") {
+      next({
+        status: 400,
+        message: `status cannot be ${req.body.data.status}`
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+}
+
 function validateNumber(req, res, next) {
   //replaces () and - so that it can be formatted for database
   const number = res.locals.mobile_number.replace(/[^0-9]/g, '')
@@ -157,6 +173,73 @@ async function create(req, res) {
     data: newReservation[0]
   })
 }
+
+async function validateReservationExists(req, res, next) {
+  if(!req.params.reservation_Id) {
+    next( {
+      status: 400,
+      message: `reservation_id must be included`
+    })
+  }
+  const reservation = await service.read(req.params.reservation_Id)
+  if(!reservation) {
+    next({
+      status: 404,
+      message: `reservation_id ${req.params.reservation_Id} does not exist`
+    })
+  } else {
+    res.locals.reservation = reservation
+    next()
+  }
+}
+
+async function read(req, res) {
+  const reservation = await service.read(Number(req.params.reservation_Id))
+  res.status(200).json({
+    data: reservation
+  })
+}
+
+function validateUpdatedStatus(req, res, next) {
+  const validStatus = [
+    "booked",
+    "seated",
+    "finished"
+  ]
+  if(req.body.data.status) {
+    if(validStatus.includes(req.body.data.status)) {
+      next()
+    } else {
+      next({
+        status: 400,
+        message: `${req.body.data.status} is not a valid status`
+      })
+    }
+  } else {
+    next({
+      status: 400,
+      message: `status must be included`
+    })
+  }
+}
+
+async function validateCurrentStatus(req, res, next) {
+  if(res.locals.reservation.status === "finished") {
+    next({
+      status: 400,
+      message: `reservation with finished status cannot be updated`
+    })
+  } else {
+    next()
+  }
+}
+
+async function update(req, res) {
+  const reservation = await service.update(res.locals.reservation.reservation_id, req.body.data.status)
+  res.status(200).json({
+    data: reservation[0]
+  })
+}
  
 module.exports = {
   list: [
@@ -165,6 +248,7 @@ module.exports = {
   create: [
     validateDataIsSent,
     ["first_name", "last_name", "mobile_number", "reservation_date", "reservation_time", "people"].map(field=>validateHasTextFunction(field)), 
+    validateStatus,
     validateNumber,
     validateDate,
     validateTime,
@@ -175,4 +259,14 @@ module.exports = {
     validatePeopleSize,
     asyncErrorBoundary(create)
   ],
+  read: [
+    asyncErrorBoundary(validateReservationExists),
+    read
+  ],
+  update: [
+    asyncErrorBoundary(validateReservationExists),
+    validateUpdatedStatus,
+    validateCurrentStatus,
+    asyncErrorBoundary(update)
+  ]
 };
