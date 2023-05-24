@@ -3,19 +3,21 @@ import React from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import NewReservation from "./NewReservation";
 import Seat from "./Seat";
-import NotFound from "../layout/NotFound";
+import EditReservation from "./EditReservation";
 
 function Reservation() {
-    const { path, url } = useRouteMatch()
+    const { path } = useRouteMatch()
 
     return (
         <Switch>
             <Route path={`${path}/new`} exact>
-                <h3>Create a New Reservation</h3>
                 <NewReservation />
             </Route>
             <Route path={`${path}/:reservation_id/seat`} exact>
                 <Seat />
+            </Route>
+            <Route path={`${path}/:reservation_id/edit`} exact>
+                <EditReservation />
             </Route>
             <Route path={path}>
                 <Redirect to={`${path}/new`}/>

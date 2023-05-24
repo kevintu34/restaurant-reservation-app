@@ -1,8 +1,5 @@
 import React from "react";
-
-import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 import ReservationForm from "../reservation/ReservationForm"
-import NotFound from "../layout/NotFound";
 import { createReservation } from "../utils/api";
 
 function NewReservation() {
@@ -20,6 +17,7 @@ function NewReservation() {
     }
 
     return <div>
+        <h3>Create a New Reservation</h3>
         <ReservationForm initialFormState={initialFormState} apiHandler={apiHandler}/>
     </div>
 }
