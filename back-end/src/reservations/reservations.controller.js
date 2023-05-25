@@ -293,7 +293,7 @@ module.exports = {
   ],
   read: [
     asyncErrorBoundary(validateReservationExists),
-    read
+    asyncErrorBoundary(read)
   ],
   updateStatus: [
     asyncErrorBoundary(validateReservationExists),
