@@ -18,7 +18,7 @@ function Seat() {
     }
 
     return <div>
-        <h3>Seat a Reservation</h3>
+        <h3 className="display-4 mb-4">Seat a Reservation</h3>
         <SeatForm tables={Tables}/>
     </div>
 }

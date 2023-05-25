@@ -5,7 +5,7 @@ import DashboardReservationItem from "./DashboardReservationItem";
 function DashboardReservationList({reservations, reservationsError, statusToDisplay, loadDashboard, setReservationsError}) {
    
     return <div>
-        <table>
+        <table className="table table-hover table-bordered table-sm mb-4">
           <thead>
             <tr>
               <th>First Name</th>

@@ -14,9 +14,9 @@ function Search() {
     ]
 
     return <div>
-        <h3>Find a Reservation</h3>
+        <h3 className="display-4 mb-4">Find a Reservation</h3>
         <SearchForm setReservations={setReservations} setReservationsError={setReservationsError} setSearchSubmitted={setSearchSubmitted}/>
-        <h5>Search Results</h5>
+        {searchSubmitted && <h5>Search Results</h5>}
         {searchSubmitted && 
                 (reservations.length > 0
                 ? <DashboardReservationList reservations={reservations} reservationsError={reservationsError} statusToDisplay={statusToDisplay}/>

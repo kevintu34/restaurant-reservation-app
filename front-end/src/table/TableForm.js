@@ -38,25 +38,25 @@ function TableForm({initialFormState, apiHandler}) {
     console.log(formData)
     return <div>
         <form onSubmit={submitHandler}>
-            <h3>Create a New Table</h3>
+            <h3 className="display-4 mb-4">Create a New Table</h3>
             <div>
                 {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
             </div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="table_name">
                     Table Name
                 </label>
-                <input type="text" id="table_name" name="table_name" value={formData.table_name} onChange={changeHandler}/>
+                <input type="text" id="table_name" name="table_name" value={formData.table_name} onChange={changeHandler} className="form-control"/>
             </div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="capacity">
                     Capacity
                 </label>
-                <input type="number" id="capacity" name="capacity" value={formData.capacity} onChange={changeHandler}/>
+                <input type="number" id="capacity" name="capacity" value={formData.capacity} onChange={changeHandler} className="form-control"/>
             </div>
             <div>
-                <button type="button" onClick={()=> history.goBack()} className="btn btn-secondary">Cancel</button>
-                <button className="btn btn-primary" type="submit">Submit</button>
+                <button type="button" onClick={()=> history.goBack()} className="btn btn-outline-secondary btn-sm">Cancel</button>
+                <button className="btn btn-outline-primary btn-sm mx-2" type="submit">Submit</button>
             </div>
         </form>
     </div>

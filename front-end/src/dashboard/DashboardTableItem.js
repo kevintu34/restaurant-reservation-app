@@ -29,7 +29,7 @@ function DashboardTableItem({loadDashboard, table, setTablesError, setTables, se
         <td>{table_name}</td>
         <td>{capacity}</td>
         <td data-table-id-status={table.table_id}>{table.reservation_id ? "Occupied" : "Free"}</td>
-        {table.reservation_id && <td><button className="btn btn-primary" onClick={clickHandler} data-table-id-finish={table.table_id}>Finish</button></td>}
+        <td>{table.reservation_id && <button className="btn btn-outline-primary btn-sm" onClick={clickHandler} data-table-id-finish={table.table_id}>Finish</button>}</td>
     </tr>
 }
 

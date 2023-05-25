@@ -35,9 +35,11 @@ function SearchForm( {setReservations, setReservationsError, setSearchSubmitted}
 
     return <div>
         <form onSubmit={submitHandler}>
-            <label htmlFor="mobile_number">Mobile Number</label>
-            <input type="text" id="mobile_number" name="mobile_number" placeholder="Enter a customer's phone number" value={formData.mobile_number} onChange={changeHandler}/>
-            <button type="submit" className="btn btn-primary">Find</button>
+            <div className="form-group">
+                <label htmlFor="mobile_number">Mobile Number</label>
+                <input type="text" id="mobile_number" name="mobile_number" placeholder="Enter a customer's phone number" value={formData.mobile_number} onChange={changeHandler} className="form-control mb-2"/>
+                <button type="submit" className="btn btn-outline-primary btn-sm">Find</button>
+            </div>
         </form>
     </div>
 }

@@ -22,7 +22,7 @@ function DashboardTableList({loadDashboard, reservations, setReservations, reser
         <div className="d-md-flex mb-3">
           <h4 className="mb-0">Tables</h4>
         </div>
-        <table>
+        <table className="table table-hover table-bordered table-sm">
           <thead>
             <tr>
               <th>Table Name</th>
