@@ -38,24 +38,24 @@ function SeatForm({tables}) {
     }
 
     return <div>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} >
             <div>
                 {errorMessage && <p className="alert alert-danger">{errorMessage}</p>}
             </div>
             <p>Please select a table from the dropdown menu</p>
-            <div>
+            <div className="mb-2">
                 <label htmlFor="table_id">
-                    Table Name
+                    Table Name:
                 </label>
-                <select name="table_id" id="table_id" onChange={changeHandler}>
+                <select name="table_id" id="table_id" onChange={changeHandler} className="mx-2">
                     {tables.map(table=><option key={table.table_id} value={table.table_id} >
                         {table.table_name} - {table.capacity}
                     </option>)}
                 </select>
             </div>
             <div>
-                <button type="button" onClick={()=> history.goBack()} className="btn btn-secondary">Cancel</button>
-                <button className="btn btn-primary" type="submit">Submit</button>
+                <button type="button" onClick={()=> history.goBack()} className="btn btn-outline-secondary btn-sm">Cancel</button>
+                <button className="btn btn-outline-primary btn-sm mx-2" type="submit">Submit</button>
             </div>
         </form>
     </div>

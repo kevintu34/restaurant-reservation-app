@@ -34,7 +34,7 @@ function loadReservation() {
     }
 
     return <div>
-        <h3>Edit a Reservation</h3>
+        <h3 className="display-4 mb-4">Edit a Reservation</h3>
         <ReservationForm initialFormState={initialFormState} apiHandler={apiHandler}/>
     </div>
 }

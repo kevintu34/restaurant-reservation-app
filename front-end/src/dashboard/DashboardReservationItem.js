@@ -34,9 +34,9 @@ function DashboardReservationItem({reservation, statusToDisplay, loadDashboard, 
             <td>{reservation_time}</td>
             <td>{people}</td>
             <td data-reservation-id-status={reservation.reservation_id}>{status}</td>
-            <td>{status==="booked" && <Link to={`/reservations/${reservation_id}/seat`} className="btn btn-primary" href={`/reservations/${reservation_id}/seat`}>Seat</Link>}</td>
-            <td><Link to={`/reservations/${reservation_id}/edit`} className="btn btn-primary" href={`/reservations/${reservation_id}/edit`}>Edit</Link></td>
-            <td><button onClick={cancelHandler} className="btn btn-primary" data-reservation-id-cancel={reservation.reservation_id}>Cancel</button></td>
+            <td>{status==="booked" && <Link to={`/reservations/${reservation_id}/seat`} className="btn btn-outline-primary btn-sm" href={`/reservations/${reservation_id}/seat`}>Seat</Link>}</td>
+            <td><Link to={`/reservations/${reservation_id}/edit`} className="btn btn-outline-secondary btn-sm" href={`/reservations/${reservation_id}/edit`}>Edit</Link></td>
+            <td><button onClick={cancelHandler} className="btn btn-outline-danger btn-sm" data-reservation-id-cancel={reservation.reservation_id}>Cancel</button></td>
         </tr>
 }
 

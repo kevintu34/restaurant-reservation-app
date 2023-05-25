@@ -17,7 +17,7 @@ function NewReservation() {
     }
 
     return <div>
-        <h3>Create a New Reservation</h3>
+        <h3 className="display-4 mb-4">Create a New Reservation</h3>
         <ReservationForm initialFormState={initialFormState} apiHandler={apiHandler}/>
     </div>
 }

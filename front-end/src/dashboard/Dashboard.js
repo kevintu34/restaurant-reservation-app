@@ -4,6 +4,7 @@ import { listReservations } from "../utils/api";
 import DashboardReservationList from "./DashboardReservationList";
 import DashboardTableList from "./DashboardTableList";
 import { today } from "../utils/date-time";
+import "./Dashboard.css"
 
 /**
  * Defines the dashboard page.
@@ -62,16 +63,18 @@ function Dashboard({ date }) {
 
   return (
     <main>
-      <h1>Dashboard</h1>
+      <h1 className="display-4 mb-4">Dashboard</h1>
         <Switch>
           <Route path={`${path}`}>
-          <div className="d-md-flex mb-3">
-            <h4 className="mb-0">Reservations for {date}</h4>
-          </div>
-          <div>
-            <button onClick={previousHandler}>Previous</button>
-            <button onClick={todayHandler}>Today</button>
-            <button onClick={forwardHandler}>Next</button>
+          <div className="d-flex justify-content-between">
+            <div className="d-md-flex mb-3">
+              <h4 className="mb-0">Reservations for {date}</h4>
+            </div>
+            <div>
+              <button className="btn btn-outline-secondary btn-sm" onClick={previousHandler}>Previous</button>
+              <button className="btn btn-outline-primary btn-sm mx-2" onClick={todayHandler}>Today</button>
+              <button className="btn btn-outline-secondary btn-sm" onClick={forwardHandler}>Next</button>
+            </div>
           </div>
             <DashboardReservationList loadDashboard={loadDashboard} date={date} reservations={reservations} setReservations={setReservations} reservationsError={reservationsError} setReservationsError={setReservationsError} statusToDisplay={statusToDisplay}/>
             <DashboardTableList loadDashboard={loadDashboard} reservations={reservations} setReservations={setReservations} reservationsError={reservationsError} setReservationsError={setReservationsError}/>
