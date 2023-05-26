@@ -1,6 +1,7 @@
 const service = require("./reservations.service")
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary")
 
+//checks if the query parameter is a date or number and routes it appropriately to the correct service
 async function list(req, res) {
   if(req.query.date) {
     const date = req.query.date || null
@@ -76,6 +77,7 @@ function validateNumber(req, res, next) {
   }
 }
 
+//makes sure the date is validated properly by trying to convert it into a Date object
 function validateDate(req, res, next) {
   const reservationDate = new Date(res.locals.reservation_date)
   if(!isNaN(reservationDate)) {
@@ -88,6 +90,7 @@ function validateDate(req, res, next) {
   }
 }
 
+//makes sure the time is validated properly by trying to convert it into a Date object
 function validateTime(req, res, next) {
   const reservationDate = new Date(`${res.locals.reservation_date} ${res.locals.reservation_time}`)
   if(!isNaN(reservationDate)) {
@@ -165,12 +168,12 @@ function validatePeople(req, res, next) {
 }
 
 function validatePeopleSize(req, res, next) {
-  if(Number(res.locals.people) > 1) {
+  if(Number(res.locals.people) > 0) {
     next()
   } else {
     next({
       status: 400,
-      message: `Party size must be greater than 1`
+      message: `Party size must be greater than 0`
     })
   }
 }
@@ -261,6 +264,7 @@ async function updateStatus(req, res) {
   })
 }
 
+//returns the mobile number in the format sought by the test
 async function updateReservation(req, res) {
   const reservationToUpdate = {
     ...res.locals.reservation,

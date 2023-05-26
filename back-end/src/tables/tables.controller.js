@@ -115,7 +115,6 @@ async function validateTableIsFree(req, res, next) {
 }
 
 async function validateTableHasCapacity(req, res, next) {
-  //lookup the reservation, if the reservation has more people than the capacity, error
   if(res.locals.reservation.people > res.locals.table.capacity) {
     next({
       status: 400,
@@ -126,6 +125,7 @@ async function validateTableHasCapacity(req, res, next) {
   }
 }
 
+//updates both tables to ensure they are updated at the same time
 async function update(req, res) {
   const updatedTableData = {
     ...res.locals.table,
@@ -139,6 +139,7 @@ async function update(req, res) {
   })
 }
 
+//when trying to update the reservation from the table id only
 async function validateReservationExistsFromTable(req, res, next) {
   const reservation = await reservationService.read(res.locals.table.reservation_id)
   if(reservation) {
